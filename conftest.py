@@ -16,7 +16,6 @@ def browser_context(playwright: playwright):
 
 @pytest.fixture(scope='session')
 def login_to_account(browser_context):
-    breakpoint()
     page = browser_context.new_page()
     login_page = LoginPage(page)
     login_page.login()
