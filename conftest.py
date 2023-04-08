@@ -25,7 +25,6 @@ def pytest_addoption(parser):
 
 @pytest.fixture(scope='session')
 def target_env(request):
-    breakpoint()
     config_path = request.config.getoption('--config-file')
     config_path = os.path.join(os.path.dirname(__file__), "config" , config_path)
     with open(config_path) as config_file:
