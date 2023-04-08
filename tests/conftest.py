@@ -7,9 +7,10 @@ logger = logging.getLogger(__name__)
 
 @pytest.fixture(scope='function')
 def product_page(browser_context,
-                 login_to_account) -> ProductPage:
+                 login_to_account,
+                 target_env) -> ProductPage:
     page = browser_context.new_page()
-    product_page_object = ProductPage(page)
+    product_page_object = ProductPage(page, target_env=target_env)
     product_page_object.goto()
     yield product_page_object
     product_page_object.close()

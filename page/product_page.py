@@ -2,14 +2,15 @@ from playwright.sync_api import Page
 
 class ProductPage:
 
-    def __init__(self, page: Page) -> None:
+    def __init__(self, page: Page, target_env) -> None:
         self.page = page
         self.add_to_cart_locator = "//button[@id='add-to-cart-{item_id}']"
         self.cart_locator = "//a[@class='shopping_cart_link']"
+        self.url = target_env['BASE_URL'] + '/inventory.html'
         # self.add_to_cart_locator.
 
-    def goto(self):
-        self.page.goto('https://www.saucedemo.com/inventory.html')
+    def goto(self) -> None:
+        self.page.goto(self.url)
         
     def add_to_cart(self,
                     list_items: list) -> None:
