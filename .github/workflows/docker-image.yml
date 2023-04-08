@@ -15,7 +15,7 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag playwright-test-local:latest
     - name: Docker Run Action
-      run: docker container run -it -v ${{ github.workspace }}/report:/tmp/report playwright-test-local:latest
+      run: docker container run -i -v ${{ github.workspace }}/report:/tmp/report playwright-test-local:latest
     - name: Archive code coverage results
       uses: actions/upload-artifact@v3
       with:
