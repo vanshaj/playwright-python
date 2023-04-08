@@ -11,15 +11,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      name: Checkout the code
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag playwright-test-local:latest
-      
     - name: Docker Run Action
-      uses: addnab/docker-run-action@v3
-      with:
-        image: playwright-test-local:latest
-        options: -v ${{ github.workspace }}/report:/tmp/report
-
+      run: docker container run -it -v ${{ github.workspace }}/report:/tmp/report playwright-test-local:latest
     - name: Archive code coverage results
       uses: actions/upload-artifact@v3
       with:
