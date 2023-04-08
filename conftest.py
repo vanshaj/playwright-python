@@ -31,9 +31,11 @@ def target_env(request):
     with open(config_path) as config_file:
         config_data = json.load(config_file)
     assert 'BASE_URL' in config_data, 'No base url found'
-    assert 'USERNAME' in config_data, 'No username found'
-    assert 'PASSWORD' in config_data, 'No password found'
+    assert  os.environ.get('USERNAME'), 'No username found'
+    assert  os.environ.get('PASSWORD'), 'No password found'
     assert 'HEADLESS' in config_data, 'No headless found'
+    config_data['USERNAME'] = os.environ['USERNAME']
+    config_data['PASSWORD'] = os.environ['PASSWORD']
     return config_data
 
 @pytest.fixture(scope='session')
