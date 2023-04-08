@@ -19,3 +19,9 @@ jobs:
       with:
         image: playwright-test-local:latest
         options: -v ${{ github.workspace }}/report:/tmp/report
+
+    - name: Archive code coverage results
+      uses: actions/upload-artifact@v3
+      with:
+        name: allure-report
+        path: ${{ github.workspace }}/report

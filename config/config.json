@@ -1,5 +1,6 @@
 {
     "BASE_URL" : "https://saucedemo.com",
     "USERNAME" : "standard_user",
-    "PASSWORD" : "secret_sauce"
+    "PASSWORD" : "secret_sauce",
+    "HEADLESS" : true
 }

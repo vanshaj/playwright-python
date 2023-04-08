@@ -8,11 +8,12 @@ from page.login_page import LoginPage
 logger = logging.getLogger(__name__)
 
 @pytest.fixture(scope='session')
-def browser_context(playwright: playwright):
+def browser_context(playwright: playwright,
+                    target_env):
     logger.info("Load environment variables")
     logger.info("Logging in with standard_user")
     browser = playwright.chromium
-    context = browser.launch_persistent_context(user_data_dir="./report", headless=False)
+    context = browser.launch_persistent_context(user_data_dir="./report", headless=target_env['HEADLESS'])
     yield context
     context.close()
 
@@ -32,6 +33,7 @@ def target_env(request):
     assert 'BASE_URL' in config_data, 'No base url found'
     assert 'USERNAME' in config_data, 'No username found'
     assert 'PASSWORD' in config_data, 'No password found'
+    assert 'HEADLESS' in config_data, 'No headless found'
     return config_data
 
 @pytest.fixture(scope='session')
